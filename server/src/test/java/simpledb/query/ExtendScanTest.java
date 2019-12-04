@@ -8,13 +8,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import simpledb.server.SimpleDB;
 import simpledb.tx.Transaction;
+import static java.sql.Types.*;
+
 /**
  *
  * @author hangde01
  */
 public class ExtendScanTest {
     
-    public RenameScanTest() {
+    public ExtendScanTest() {
     }
     
     @BeforeClass
@@ -41,11 +43,12 @@ public class ExtendScanTest {
         Plan studentTblPlan = new TablePlan("student", tx);
         tx.commit(); 
         
-        Plan extendPlan = new ExtendPlan(studentTblPlan, "gradclass", 0, 4);
-        Plan extendPlan2 = new ExtendPlan(studentTblPlan, "initial", 1, 1);
+        Plan extendPlan = new ExtendPlan(studentTblPlan, "gradclass", INTEGER, 4);
         Scan extendScan = extendPlan.open(); 
-        Scan extendScan2 = extendPlan2.open(); 
         assertEquals(true,extendScan.hasField("gradclass")); 
+
+        Plan extendPlan2 = new ExtendPlan(studentTblPlan, "initial", VARCHAR, 1);
+        Scan extendScan2 = extendPlan2.open(); 
         assertEquals(true,extendScan2.hasField("initial")); 
     }
     
