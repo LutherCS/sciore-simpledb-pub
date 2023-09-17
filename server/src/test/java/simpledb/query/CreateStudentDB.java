@@ -5,7 +5,11 @@ import simpledb.tx.Transaction;
 
 /**
  * Create serverless studentdb
+<<<<<<< HEAD
  * @author yasiro01
+=======
+ * @author roman
+>>>>>>> query2
  */
 public class CreateStudentDB {
   public static void main(String[] args) {
